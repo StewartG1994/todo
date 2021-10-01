@@ -19,20 +19,37 @@
         <div class ='container'>
             <div class ='nav'>
                 <button type="button" class = 'modalBtn'>New Project</button>
-                <button type="button">Projects</button>
-                <button type="button">OverView</button>
-                <button type="button">Board</button>
-                <button type="button">List</button>
+                <button type="button">View All Projects</button>
+      
      
                   </div>
                   
           <div class ='modal'>
               <div class ='modalContent'>
-            <label for="projectName"><h3>Project Name</h3></label><br>
+            <label for="projectName"><h3>Project Name</h3></label>
             <input type="text" class="projectName" name="projectName"><br>
-        <button type= 'button' class = 'close'>Add 
+
+            <label for = 'priority'><h3>Priority Level</h3> </label>
+            <select class ='priority' name = 'priority'>
+                <option value = 'Low'>Low</option>
+                <option value = 'Medium'>Medium</option>
+                <option value = 'High'>High</option>
+                <option value = 'Urgent'>Urgent</option>
+            </select><br>
+
+            <label for ='notes'><h3>Notes</h3></label>
+            <textarea name="notes" class= "notes" cols="40" rows="10"></textarea>
+<br>
+            <label for = 'dueDate'><h3>Due Date</h3></label>
+            <input type ='text'  placeholder ='MM/DD/YYYY' class ='dueDate' name = 'dueDate'>
+
+
+       <br> <button type= 'button' class = 'close'>Add 
             
-        </button></div></div>
+        </button></div>
+    </div>
+
+        <div class = 'content'></div>
         </div>
         <script src="main.js" async defer></script>
     </body>
