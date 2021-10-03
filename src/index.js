@@ -15,6 +15,5 @@ const core  = (function() {
 })()
 
 projectCode.modal()
-projectRender.render()
 
 

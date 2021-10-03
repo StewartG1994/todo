@@ -1,6 +1,7 @@
 import { domFeatures } from "./dommodule"
 import { formatDistanceToNowStrict } from 'date-fns'
-import closestIndexTo from "date-fns/closestIndexTo"
+
+
 
 const projectCode = (function() {
 
@@ -14,6 +15,7 @@ const projectCode = (function() {
 
         
 
+
         const modalBtn =document.querySelector('.modalBtn');
          const modal = document.querySelector('.modal');
         let close = document.querySelector('.close');
@@ -24,29 +26,29 @@ const projectCode = (function() {
 
         modalBtn.addEventListener('click', () =>{
         modal.style.display = 'block';
+            
         })
         close.addEventListener('click', () =>{
-        let projectTopic = projectname.value;
-        let priorityTopic = priority.value;
-        let notesTopic = notes.value;
-        let dueDatesTopic = formatDistanceToNowStrict(new Date (dueDate.value),{unit:'day', addSuffix :true} );
+             
         let projectObject = project(projectname.value, priority.value, notes.value, dueDate.value);
         projectArray.push(projectObject)
+
+        domFeatures.projectDom(projectArray)
         console.log(projectArray)
         projectname.value = '';
         priority.value= '';
         notes.value = '';
         modal.style.display = 'none';
-        domFeatures.projectDom(projectTopic, priorityTopic, notesTopic, dueDate.value + ' ' +  dueDatesTopic)
 
 
+        
+        
+        })  
 
- 
-        })   
-    }
-    
+  //      domFeatures.projectRender()
+         
+}
 
-                
     
     return {modal, projectArray}
 })()
