@@ -1,6 +1,6 @@
 import './styles.css'
 import { projectCode } from './project'
-import {projectRender} from './projectView'
+import { domFeatures } from './dommodule'
 
 
 const core  = (function() {
@@ -8,12 +8,13 @@ const core  = (function() {
     const taskFactory = (task, description, duedate,priority, notes) =>{
         console.log('test')
         return {task, description,duedate, priority,notes}
-
     }
+
 
     return {taskFactory}
 })()
 
 projectCode.modal()
+
 
 
