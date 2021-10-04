@@ -1,6 +1,7 @@
 import './styles.css'
 import { projectCode } from './project'
 import { domFeatures } from './dommodule'
+import { endOfDay } from 'date-fns'
 
 
 const core  = (function() {
@@ -10,11 +11,17 @@ const core  = (function() {
         return {task, description,duedate, priority,notes}
     }
 
+    const renderProject = () =>{
+        let editButton = document.querySelector('test');
+        editButton.addEventListener('click', alert('test'))
 
-    return {taskFactory}
+}
+
+    return {taskFactory, renderProject}
 })()
 
-projectCode.modal()
+projectCode.loadedContent();
 
+projectCode.modal();
 
 

@@ -3,57 +3,46 @@ import { formatDistanceToNowStrict } from 'date-fns'
 
 const domFeatures = (function (){
 
-const projectDom = (array) => {
+const displayProjectCards = () =>{
+    
+    let content = document.querySelector('.content');
+   
+    content.textContent = '';
 
-    const content = document.querySelector('.content');
-    const projectDiv = document.createElement('div');
-    projectDiv.className = 'projectDiv';
+    projectCode.projectArray.forEach(function(item ,index){
+        let cardDiv = document.createElement('div');
+        let header = document.createElement('h1');
+        let priority = document.createElement('p');
+        let notes = document.createElement('p');
+        let duedate =document.createElement('p');
+        let editBtn = document.createElement('button')
+        editBtn.textContent = 'Edit Project'
+        editBtn.className = 'edit';
+        cardDiv.className = 'projectDiv'
 
-    const projectTitle = document.createElement('h3');
-    const priorityText = document.createElement('h3');
-    const notesText = document.createElement('p');
-    const dueDateText = document.createElement('p');
-    const edit = document.createElement('button');
-    edit.textContent = 'Test';
-    edit.className = 'test';
+        header.textContent = item.project;
+        priority.textContent = item.priority;
+        notes.textContent = item.notes;
+        duedate.textContent = item.duedate;
 
+        cardDiv.appendChild(header);
+        cardDiv.appendChild(priority)
+        cardDiv.appendChild(notes);
+        cardDiv.appendChild(duedate);
+        cardDiv.appendChild(editBtn)
+        content.appendChild(cardDiv);
+    
+        editBtn.addEventListener('click', () =>  renderProjectOverView(cardDiv, content))
+        cardDiv.setAttribute('data-number', index)
 
-    array.forEach(item =>{
-
-    projectTitle.textContent = item.project;
-    priorityText.textContent = item.priority;
-    notesText.textContent = item.notes;
-    dueDateText.textContent = item.duedate
-    projectDiv.appendChild(projectTitle);
-    projectDiv.appendChild(priorityText);
-    projectDiv.appendChild(notesText);
-    projectDiv.appendChild(dueDateText);
-    projectDiv.appendChild(edit);
-    content.appendChild(projectDiv);
-
-    array.forEach(function(item, index) {
-        projectDiv.setAttribute('data-number', index)
     })
-})
-
-projectRender (edit, array, projectDiv )
 }
 
-const projectRender = ( edit, array, projectDiv) =>{
-
-    const content = document.querySelector('.content')
-
-
-
-    edit.addEventListener('click', event =>{
-        let data = projectDiv.getAttribute('data-number');
-        
-        let indexedData = array[data]
-        content.textContent = '';
-        displayProject(indexedData)
-       
- 
-    })
+const renderProjectOverView  = (projectDiv ,content) =>{
+content.textContent ='';
+let data = projectDiv.getAttribute('data-number');
+let indexedData = projectCode.projectArray[data];
+displayProject(indexedData)
 }
 
 const displayProject = (data) =>{
@@ -61,7 +50,12 @@ const displayProject = (data) =>{
     let content = document.querySelector('.content');
     let headerDiv = document.createElement('div')
     let taskDiv = document.createElement('div');
-    content.className ='projectView';
+    let taskButton = document.createElement('button');
+    taskButton.className = 'taskButton';
+    taskDiv.className ='taskDiv'
+    taskButton.textContent = '+ Task'
+    let projectViewDiv = document.createElement('div'); 
+    projectViewDiv.className = 'headerDiv'
     let header = document.createElement('h1');
     headerDiv.className = 'projectViewHeader'
 
@@ -76,45 +70,30 @@ const displayProject = (data) =>{
     notesHeader.textContent = 'View Notes';
     notesContent.textContent = String(data['notes']);
     duedate.textContent = String(data['duedate'])
-    priority.textContent = String(data['priority'])
-    headerDiv.appendChild(header)
-    headerDiv.appendChild(priority)
+    priority.textContent = 'Prioirty: ' + String(data['priority'])
+
+    taskDiv.appendChild(taskButton)
+
+    headerDiv.appendChild(header);
     headerDiv.appendChild(duedate)
-    content.appendChild(headerDiv);
-    notesDiv.appendChild(notesHeader)
-    notesDiv.appendChild(notesContent)
-    taskDiv.appendChild(notesDiv)
-    content.appendChild(taskDiv)
-    hideNotes(notesHeader)
+    headerDiv.appendChild(priority);
+
+    projectViewDiv.appendChild(headerDiv)
+    projectViewDiv.appendChild(taskDiv)
+    content.appendChild(projectViewDiv)
+
+
+
 
     let projectBtn = document.querySelector('.modalBtn')
     projectBtn.addEventListener('click', () =>{
         content.textContent = '';
     })
-
-
-    let viewAll = document.querySelector('.viewAll');
-        viewAll.addEventListener('click', () =>{
-      viewAll(projectCode.projectArray)
-
-        })
-    
-
 }
 
-const hideNotes = (notesTab) => {
 
-    const notes = document.querySelector('.notesContent')
-    notesTab.addEventListener('click', () =>{
-        if (notesTab.textContent === 'Hide Notes'){notes.style.display = 'none'; notesTab.textContent ='View Notes'}
-        else {
-        notes.style.display ='block';
-        notesTab.textContent = 'Hide Notes'
-        }
-    })
-}
 
-return {projectDom, projectRender}
+return {displayProjectCards, renderProjectOverView}
 })()
 
 export {domFeatures}

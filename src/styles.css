@@ -97,15 +97,21 @@ border-radius: 3px;
 }
 
 
-.projectViewHeader {
+.projectViewHeader{
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    padding: 30px;
+    gap:40px;
+    background-color:#2C394B;
+    color: #EEEEEE;
+
+    border: 1px solid #082032;
+    border-radius: 25px;
+
 }
 
 .notesDiv{
     display: flex;
-    margin-top: 10px;
+    margin-top: 10px;;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -113,4 +119,24 @@ border-radius: 3px;
 }
 .notesContent{
     display: none;
+}
+
+button{
+    background-color: #2C394B;
+    color: #EEEEEE;
+    border: none;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.taskDiv{
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.taskButton{
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 5px;
 }
