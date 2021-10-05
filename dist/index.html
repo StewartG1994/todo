@@ -49,6 +49,31 @@
         </button></div>
     </div>
 
+    <div class ='taskModal'>
+        <div class ='TaskModalContent'>
+      <label for="taskName"><h3>Task Name</h3></label>
+      <input type="text" class="taskName" name="taskName"><br>
+
+      <label for = 'priority'><h3>Priority Level</h3> </label>
+      <select class ='taskpriority' name = 'priority'>
+          <option value = 'Low'>Low</option>
+          <option value = 'Medium'>Medium</option>
+          <option value = 'High'>High</option>
+          <option value = 'Urgent'>Urgent</option>
+      </select><br>
+
+      <label for ='notes'><h3>Notes</h3></label>
+      <textarea name="notes" class= "tasknotes" cols="40" rows="10"></textarea>
+<br>
+      <label for = 'dueDate'><h3>Due Date</h3></label>
+      <input type ='text'  placeholder ='MM/DD/YYYY' class ='taskdueDate' name = 'dueDate'>
+
+
+ <br> <button type= 'button' class = 'taskclose'>Add Task
+      
+  </button></div>
+</div>
+
         <div class = 'content'></div>
         </div>
         <script src="main.js" async defer></script>

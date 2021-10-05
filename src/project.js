@@ -15,7 +15,10 @@ const projectCode = (function() {
         projectArray.push(defaultProject);
         window.addEventListener('load', () => {
         domFeatures.displayProjectCards()
-        })}
+        })
+    
+
+    }
 
         const modal = () =>{
 
@@ -47,8 +50,6 @@ const projectCode = (function() {
     
             })         
 
-            
-
             let viewAll = document.querySelector('.viewAll');
             viewAll.addEventListener('click', ()=>{
                 const modal = document.querySelector('.modal');
@@ -58,9 +59,6 @@ const projectCode = (function() {
 
     })}
 
-    
-
-    
     return {loadedContent, modal, projectArray};
 })()
 

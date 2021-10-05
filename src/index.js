@@ -6,10 +6,6 @@ import { endOfDay } from 'date-fns'
 
 const core  = (function() {
 
-    const taskFactory = (task, description, duedate,priority, notes) =>{
-        console.log('test')
-        return {task, description,duedate, priority,notes}
-    }
 
     const renderProject = () =>{
         let editButton = document.querySelector('test');
@@ -17,11 +13,13 @@ const core  = (function() {
 
 }
 
-    return {taskFactory, renderProject}
+    return { renderProject}
 })()
 
 projectCode.loadedContent();
 
 projectCode.modal();
+
+
 
 
