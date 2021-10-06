@@ -5,9 +5,9 @@ const domFeatures = (function (){
 
     let taskButton = document.createElement('button');
     let viewTasks = document.createElement('button');
+    let taskDivContainer = document.createElement('div');
     let indexedData = null;
     let currentIndex = null;
-    let taskArray = [];
 
     const taskFactory = (task, priority, notes, duedate) =>{   
         return {task, priority, notes, duedate}
@@ -46,6 +46,10 @@ const displayProjectCards = () =>{
     
         editBtn.addEventListener('click', () =>  {
             renderProjectOverView(cardDiv); 
+            let currentArray =projectCode.projectArray[index];
+            taskRender(currentArray['tasks'])
+            
+
     })
         cardDiv.setAttribute('data-number', index)
    
@@ -60,7 +64,6 @@ const renderProjectOverView  = (projectDiv) =>{
 let data = projectDiv.getAttribute('data-number');
 currentIndex = data;
 indexedData = projectCode.projectArray[data];
-taskArray = [];
 displayProject(indexedData)
 
 }
@@ -95,9 +98,10 @@ const displayProject = (data) =>{
     notesContent.textContent = String(data['notes']);
     duedate.textContent = String(data['duedate'])
     priority.textContent = 'Prioirty: ' + String(data['priority'])
+  
 
-    let taskDivContainer = document.createElement('div');
-    taskDivContainer.className = 'taskDivContainer';
+ 
+    taskDivContainer.className ='taskDivContainer';
     taskDiv.appendChild(taskButton)
     taskDiv.appendChild(viewTasks)
     headerDiv.appendChild(header);
@@ -116,6 +120,7 @@ const displayProject = (data) =>{
 const addTask = () => {
      let taskModal = document.querySelector('.taskModal');
      let taskclose = document.querySelector('.taskclose');
+
       
      taskButton.addEventListener('click', () =>{
          taskModal.style.display = 'block';
@@ -130,15 +135,45 @@ const addTask = () => {
         let taskduedate = document.querySelector('.taskdueDate')
         let tasknotes = document.querySelector('.tasknotes');
         let taskItem = taskFactory(taskname.value,taskpriority.value, tasknotes.value, taskduedate.value)
-        taskArray.push(taskItem);
-        
-        console.log(projectCode.projectArray[currentIndex])
+
+     
         let currentArray =  projectCode.projectArray[currentIndex];
-        currentArray['tasks'] = taskArray;
-        console.log(projectCode.projectArray)
+        currentArray['tasks'].push(taskItem);
+        console.log(currentArray['tasks'])
+ 
         
-    
+        taskRender(currentArray['tasks'])
+  
      })
+}
+
+
+
+const taskRender = (array) => {
+    taskDivContainer.textContent = '';
+ 
+    array.forEach(function(item, index){
+  
+  
+    let taskDivContent = document.createElement('div');
+    taskDivContent.className = 'taskDivContent'
+
+    let taskName = document.createElement('p');
+    let dueData = document.createElement('p');
+    let priority = document.createElement('p');
+    let notes = document.createElement('p');
+
+    taskName.textContent = item.task ;
+    dueData.textContent = item.duedate;
+    priority.textContent = item.priority;
+    notes.textContent = item.notes;
+    taskDivContent.appendChild(taskName)
+    taskDivContent.appendChild(dueData)
+    taskDivContent.appendChild(priority)
+    taskDivContainer.appendChild(taskDivContent);
+
+    
+})
 }
 
 

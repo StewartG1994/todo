@@ -6,6 +6,8 @@ const projectCode = (function() {
     const projectArray  = [];
 
     const project = (project, priority, notes, duedate, tasks) =>{   
+
+        tasks = [];
         return {project, priority, notes, duedate, tasks}
     }
 
