@@ -5,8 +5,8 @@ const projectCode = (function() {
 
     const projectArray  = [];
 
-    const project = (project, priority, notes, duedate) =>{   
-        return {project, priority, notes, duedate}
+    const project = (project, priority, notes, duedate, tasks) =>{   
+        return {project, priority, notes, duedate, tasks}
     }
 
     const loadedContent = () => {
@@ -15,7 +15,10 @@ const projectCode = (function() {
         projectArray.push(defaultProject);
         window.addEventListener('load', () => {
         domFeatures.displayProjectCards()
+        
+   
         })
+
     
 
     }
@@ -38,7 +41,7 @@ const projectCode = (function() {
             close.addEventListener('click', () =>{
         
             let dateData = formatDistanceToNowStrict(new Date(dueDate.value));
-            let projectObject = project(projectname.value, priority.value, notes.value, 'Due in ' +  dateData + ' on the ' + dueDate.value);
+            let projectObject = project(projectname.value, priority.value, notes.value, 'Due in ' +  dateData + ' on the ' + dueDate.value, []);
             projectArray.push(projectObject)
             console.log(projectArray)
             projectname.value = '';
@@ -56,11 +59,14 @@ const projectCode = (function() {
                 modal.style.display = 'none';
                domFeatures.displayProjectCards();
                console.log('test')
+         
 
     })}
 
-    return {loadedContent, modal, projectArray};
+    return {loadedContent, modal, projectArray}
 })()
+
+
 
 export {projectCode}
 

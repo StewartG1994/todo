@@ -7,17 +7,16 @@ import { endOfDay } from 'date-fns'
 const core  = (function() {
 
 
-    const renderProject = () =>{
-        let editButton = document.querySelector('test');
-        editButton.addEventListener('click', alert('test'))
+    const renderTask = () =>{
+        domFeatures.addTask()
 
 }
 
-    return { renderProject}
+    return { renderTask}
 })()
 
 projectCode.loadedContent();
-
+core.renderTask()
 projectCode.modal();
 
 
