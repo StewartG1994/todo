@@ -36,6 +36,42 @@ body{
     padding: 15px 15px 15px 60px;
 }
 
+.taskView{
+
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    
+        display: none;
+        padding: 30px;
+        border: 1px solid black;
+        width: 50%;
+        height: auto;
+        margin: auto;
+        background-color: #2C394B;
+        border-radius: 3px;
+        color: #EEEEEE;
+    
+    
+}
+
+.editTaskModal{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: none;
+    padding: 30px;
+    border: 1px solid black;
+    width: 50%;
+    height: auto;
+    margin: auto;
+    background-color: #2C394B;
+    border-radius: 3px;
+    color: #EEEEEE;
+}
 
 .taskModal{
     position: fixed;
@@ -94,7 +130,7 @@ select{
 
 .notes{width:100%}
 
-.modalContent .TaskModalContent {
+.modalContent .TaskModalContent .editTaskModal .taskView{
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -179,7 +215,7 @@ button{
 }
 
 .taskDivContainer {
-    width: 100%;
+    width: 80%;
 }
 
 .taskDivContent

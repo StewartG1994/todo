@@ -4,7 +4,6 @@ import { add, formatDistanceToNowStrict } from 'date-fns'
 const domFeatures = (function (){
 
     let taskButton = document.createElement('button');
-    let viewTasks = document.createElement('button');
     let taskDivContainer = document.createElement('div');
     let indexedData = null;
     let currentIndex = null;
@@ -78,8 +77,6 @@ const displayProject = (data) =>{
     let taskDiv = document.createElement('div');
 
     taskButton.className = 'taskButton';
-    viewTasks.className = 'taskButton';
-    viewTasks.textContent = 'View Tasks'
     taskDiv.className ='taskDiv';
     taskButton.textContent = '+ Task'
     let projectViewDiv = document.createElement('div'); 
@@ -103,7 +100,6 @@ const displayProject = (data) =>{
  
     taskDivContainer.className ='taskDivContainer';
     taskDiv.appendChild(taskButton)
-    taskDiv.appendChild(viewTasks)
     headerDiv.appendChild(header);
     headerDiv.appendChild(duedate)
     headerDiv.appendChild(priority);
@@ -131,7 +127,7 @@ const addTask = () => {
         taskModal.style.display = 'none';
 
         let taskname = document.querySelector('.taskName');
-        let taskpriority = document.querySelector('.priority');
+        let taskpriority = document.querySelector('.taskpriority');
         let taskduedate = document.querySelector('.taskdueDate')
         let tasknotes = document.querySelector('.tasknotes');
         let taskItem = taskFactory(taskname.value,taskpriority.value, tasknotes.value, taskduedate.value)
@@ -140,9 +136,14 @@ const addTask = () => {
         let currentArray =  projectCode.projectArray[currentIndex];
         currentArray['tasks'].push(taskItem);
         console.log(currentArray['tasks'])
+        taskname.value =''
+        taskpriority.value = '';
+        taskduedate.value= '';
+        tasknotes.value = '';
+        taskItem.value = ''
  
         
-        taskRender(currentArray['tasks'])
+        taskRender(currentArray['tasks'] )
   
      })
 }
@@ -151,17 +152,35 @@ const addTask = () => {
 
 const taskRender = (array) => {
     taskDivContainer.textContent = '';
- 
+    let spliceArray = array;
+    let taskModal = document.querySelector('.editTaskModal');
+    let taskclose = document.querySelector('.editClose');
+    let tasknameAREA = document.querySelector('.taskNameArea');
+    let taskpriorityAREA = document.querySelector('.priorityArea');
+    let taskduedateAREA = document.querySelector('.taskdueDateArea')
+    let tasknotesAREA = document.querySelector('.tasknotesArea');
+
+
+
     array.forEach(function(item, index){
   
   
     let taskDivContent = document.createElement('div');
     taskDivContent.className = 'taskDivContent'
+    taskDivContent.setAttribute('data-number', index);
+
 
     let taskName = document.createElement('p');
     let dueData = document.createElement('p');
     let priority = document.createElement('p');
     let notes = document.createElement('p');
+    let editTaskButton = document.createElement('button')
+    let RemoveTaskButton = document.createElement('button')
+
+
+    editTaskButton.textContent = 'View / Edit';
+    RemoveTaskButton.textContent = 'X'
+
 
     taskName.textContent = item.task ;
     dueData.textContent = item.duedate;
@@ -170,13 +189,63 @@ const taskRender = (array) => {
     taskDivContent.appendChild(taskName)
     taskDivContent.appendChild(dueData)
     taskDivContent.appendChild(priority)
+
+    taskDivContent.appendChild(editTaskButton)
+    taskDivContent.appendChild(RemoveTaskButton)
+  
     taskDivContainer.appendChild(taskDivContent);
 
+
+    RemoveTaskButton.addEventListener('click', (event) =>{
+       let elementDelete = event.target.parentElement;
+       let datanumber = elementDelete.getAttribute('data-number');
+        spliceArray.splice(datanumber ,1)
+        taskDivContainer.removeChild(elementDelete)
     
+    })
+
+
+
+    editTaskButton.addEventListener('click', event =>{
+        let elementEdit = event.target.parentElement;
+        let editdatanumber = elementEdit.getAttribute('data-number');
+        let newInfo = spliceArray[editdatanumber];
+        taskModal.style.display = 'block';
+
+        tasknameAREA.value = newInfo.task;
+        taskduedateAREA.value = newInfo.duedate;
+        tasknotesAREA.value = newInfo.notes
+        taskpriorityAREA.value = newInfo.priority;
+        console.log(editdatanumber)
+        taskclose.addEventListener('click', () =>{
+
+            newInfo.task= tasknameAREA.value;
+            taskName.textContent = tasknameAREA.value;
+
+            newInfo.duedate = taskduedateAREA.value;
+            dueData.textContent = taskduedateAREA.value;
+
+            newInfo.priority = taskpriorityAREA.value;
+            priority.textContent = taskpriorityAREA.value;
+
+            newInfo.notes = tasknotesAREA.value;
+            notes.textContent = tasknameAREA.value;
+
+
+            taskModal.style.display = 'none';
+            editdatanumber = null;
+
+
+        })
+
+
+
+
+    })
+
+
 })
 }
-
-
 
 return {displayProjectCards, addTask}
 })()

@@ -74,6 +74,55 @@
   </button></div>
 </div>
 
+
+<div class ='editTaskModal'>
+    <div class ='EditmodalContent'>
+  <label for="updadeTaskName"><h3>Tasks Name</h3></label>
+  <input type="text" class="taskNameArea" name="projectName"><br>
+
+  <label for = 'priority'><h3>Priority Level</h3> </label>
+  <select class ='priorityArea' name = 'priority'>
+      <option value = 'Low'>Low</option>
+      <option value = 'Medium'>Medium</option>
+      <option value = 'High'>High</option>
+      <option value = 'Urgent'>Urgent</option>
+  </select><br>
+
+  <label for ='notes'><h3>Notes</h3></label>
+  <textarea name="notes" class= "tasknotesArea" cols="40" rows="10"></textarea>
+<br>
+  <label for = 'dueDate'><h3>Due Date</h3></label>
+  <input type ='text'  placeholder ='MM/DD/YYYY' class ='taskdueDateArea' name = 'dueDate'>
+
+
+<br> <button type= 'button' class = 'editClose'>Edit Task
+  
+</button></div>
+</div>
+
+
+<div class ='taskView'>
+    <div class ='TaskModalContent'>
+  <label for="taskName"><h3>Task Name</h3></label>
+  <p class = 'taskViewName'></p><br>
+
+  <label for = 'priority'><h3>Priority Level</h3> </label>
+<p class = taskViewPriority></p><br>
+
+  <label for ='notes'><h3>Notes</h3></label>
+  <p class = taskViewNotes></p>
+<br>
+  <label for = 'dueDate'><h3>Due Date</h3></label>
+  <p class = taskViewDueDate></p>
+
+
+<br> <button type= 'button' class = 'taskViewclose'>Close View
+  
+</button></div>
+</div>
+
+
+
         <div class = 'content'></div>
         </div>
         <script src="main.js" async defer></script>
