@@ -4,6 +4,7 @@ import { add, formatDistanceToNowStrict } from 'date-fns'
 const domFeatures = (function (){
 
     let taskButton = document.createElement('button');
+    
     let taskDivContainer = document.createElement('div');
     let indexedData = null;
     let currentIndex = null;
@@ -116,10 +117,12 @@ const displayProject = (data) =>{
 const addTask = () => {
      let taskModal = document.querySelector('.taskModal');
      let taskclose = document.querySelector('.taskclose');
+     let content = document.querySelector('.content');
 
       
      taskButton.addEventListener('click', () =>{
          taskModal.style.display = 'block';
+  
      })
 
      taskclose.addEventListener('click', () =>{
@@ -142,6 +145,7 @@ const addTask = () => {
         tasknotes.value = '';
         taskItem.value = ''
  
+
         
         taskRender(currentArray['tasks'] )
   
@@ -153,12 +157,6 @@ const addTask = () => {
 const taskRender = (array) => {
     taskDivContainer.textContent = '';
     let spliceArray = array;
-    let taskModal = document.querySelector('.editTaskModal');
-    let taskclose = document.querySelector('.editClose');
-    let tasknameAREA = document.querySelector('.taskNameArea');
-    let taskpriorityAREA = document.querySelector('.priorityArea');
-    let taskduedateAREA = document.querySelector('.taskdueDateArea')
-    let tasknotesAREA = document.querySelector('.tasknotesArea');
 
 
 
@@ -180,7 +178,6 @@ const taskRender = (array) => {
 
     editTaskButton.textContent = 'View / Edit';
     RemoveTaskButton.textContent = 'X'
-
 
     taskName.textContent = item.task ;
     dueData.textContent = item.duedate;
@@ -204,47 +201,60 @@ const taskRender = (array) => {
     
     })
 
+editUpdate(editTaskButton, taskName, dueData, priority, notes)
+
+})
+}
+
+const editUpdate = (edit, taskName,dueData, priority, notes) => {
+    let taskModal = document.querySelector('.editTaskModal');
+    let taskclose = document.querySelector('.editClose');
+    let tasknameAREA = document.querySelector('.taskNameArea');
+    let taskpriorityAREA = document.querySelector('.priorityArea');
+    let taskduedateAREA = document.querySelector('.taskdueDateArea')
+    let tasknotesAREA = document.querySelector('.tasknotesArea');
 
 
-    editTaskButton.addEventListener('click', event =>{
+    edit.addEventListener('click', event =>{
         let elementEdit = event.target.parentElement;
         let editdatanumber = elementEdit.getAttribute('data-number');
-        let newInfo = spliceArray[editdatanumber];
+        let arrayInfo = projectCode.projectArray[currentIndex]
+        let newInfo = arrayInfo['tasks']
+        let selectedDiv = newInfo[editdatanumber]
+       
+        console.log(newInfo[editdatanumber])
         taskModal.style.display = 'block';
 
-        tasknameAREA.value = newInfo.task;
-        taskduedateAREA.value = newInfo.duedate;
-        tasknotesAREA.value = newInfo.notes
-        taskpriorityAREA.value = newInfo.priority;
-        console.log(editdatanumber)
+        tasknameAREA.value = selectedDiv.task;
+        taskduedateAREA.value = selectedDiv.duedate;
+        tasknotesAREA.value = selectedDiv.notes
+        taskpriorityAREA.value = selectedDiv.priority;
+       
         taskclose.addEventListener('click', () =>{
 
-            newInfo.task= tasknameAREA.value;
+            
+            selectedDiv.task= tasknameAREA.value;
             taskName.textContent = tasknameAREA.value;
 
-            newInfo.duedate = taskduedateAREA.value;
+            selectedDiv.duedate = taskduedateAREA.value;
             dueData.textContent = taskduedateAREA.value;
 
-            newInfo.priority = taskpriorityAREA.value;
+            selectedDiv.priority = taskpriorityAREA.value;
             priority.textContent = taskpriorityAREA.value;
 
-            newInfo.notes = tasknotesAREA.value;
+            selectedDiv.notes = tasknotesAREA.value;
             notes.textContent = tasknameAREA.value;
 
 
             taskModal.style.display = 'none';
             editdatanumber = null;
+            selectedDiv = null;
 
+            
 
         })
-
-
-
-
     })
 
-
-})
 }
 
 return {displayProjectCards, addTask}

@@ -21,12 +21,10 @@ const projectCode = (function() {
    
         })
 
-    
-
     }
 
         const modal = () =>{
-
+            let content = document.querySelector('.content');
             const modalBtn =document.querySelector('.modalBtn');
             const modal = document.querySelector('.modal');
             let close = document.querySelector('.close');
@@ -38,6 +36,9 @@ const projectCode = (function() {
     
             modalBtn.addEventListener('click', () =>{
             modal.style.display = 'block';
+   d
+  
+
                 
             })
             close.addEventListener('click', () =>{
@@ -50,8 +51,9 @@ const projectCode = (function() {
             priority.value= '';
             notes.value = '';
             modal.style.display = 'none';
+ 
             domFeatures.displayProjectCards()
-    
+       
     
             })         
 
