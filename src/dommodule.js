@@ -28,6 +28,8 @@ const displayProjectCards = () =>{
         let notes = document.createElement('p');
         let duedate =document.createElement('p');
         let editBtn = document.createElement('button')
+        let deleteBtn = document.createElement('button')
+        deleteBtn.textContent = 'X'
         editBtn.textContent = 'Edit Project'
         editBtn.className = 'edit';
         cardDiv.className = 'projectDiv'
@@ -42,7 +44,17 @@ const displayProjectCards = () =>{
         cardDiv.appendChild(notes);
         cardDiv.appendChild(duedate);
         cardDiv.appendChild(editBtn)
+        cardDiv.appendChild(deleteBtn)
         content.appendChild(cardDiv);
+
+
+    deleteBtn.addEventListener('click', (event) =>{
+        let elementDelete = event.target.parentElement;
+        let datanumber = elementDelete.getAttribute('data-number');
+         projectCode.projectArray.splice(datanumber ,1)
+         content.removeChild(elementDelete)
+     
+     })
     
         editBtn.addEventListener('click', () =>  {
             renderProjectOverView(cardDiv); 
@@ -121,7 +133,9 @@ const addTask = () => {
 
       
      taskButton.addEventListener('click', () =>{
-         taskModal.style.display = 'block';
+         taskModal.style.display = 'block' ;
+    
+
   
      })
 
@@ -144,7 +158,7 @@ const addTask = () => {
         taskduedate.value= '';
         tasknotes.value = '';
         taskItem.value = ''
- 
+    
 
         
         taskRender(currentArray['tasks'] )

@@ -4,7 +4,6 @@ import { formatDistanceToNowStrict } from 'date-fns'
 const projectCode = (function() {
 
     const projectArray  = [];
-
     const project = (project, priority, notes, duedate, tasks) =>{   
 
         tasks = [];
@@ -17,6 +16,7 @@ const projectCode = (function() {
         projectArray.push(defaultProject);
         window.addEventListener('load', () => {
         domFeatures.displayProjectCards()
+        
         
    
         })
@@ -36,7 +36,8 @@ const projectCode = (function() {
     
             modalBtn.addEventListener('click', () =>{
             modal.style.display = 'block';
-   d
+           
+   
   
 
                 
@@ -51,7 +52,8 @@ const projectCode = (function() {
             priority.value= '';
             notes.value = '';
             modal.style.display = 'none';
- 
+          
+                console.log(storage)
             domFeatures.displayProjectCards()
        
     
